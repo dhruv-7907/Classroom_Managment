@@ -8,7 +8,7 @@ public partial class Classroom
     public int ClassroomId { get; set; }
     public int test { get; set; }
     public int test1 { get; set; }
-    public int test2 { get; set; }
+    public int classTest { get; set; }
     public string ClassroomName { get; set; } = null!;
 
     public int TeacherId { get; set; }
