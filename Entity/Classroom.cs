@@ -6,7 +6,7 @@ namespace Classroom_Managment.Entity;
 public partial class Classroom
 {
     public int ClassroomId { get; set; }
-
+    public int test { get; set; }
     public string ClassroomName { get; set; } = null!;
 
     public int TeacherId { get; set; }
