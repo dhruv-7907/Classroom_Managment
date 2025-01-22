@@ -1,0 +1,54 @@
+﻿body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 56px;
+    left: -250px;
+    background-color: aliceblue;
+    padding-top: 20px;
+    transition: 0.3s;
+    overflow-x: hidden;
+}
+.close-btn {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    font-size: 36px;
+    color: white;
+}
+
+.main-content {
+    transition: margin-left 0.3s;
+    padding: 15px;
+    margin-top: 56px
+}
+
+.open-btn {
+    font-size: 18px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    border: none;
+}
+.teah_card{
+    height:100px;
+    width:500px;
+    border:2px solid black;
+}
+
+/*create classroom page*/
+.classcard {
+    height: 100px;
+    width: 500px;
+    border: 2px solid black;
+}
+.workcard {
+    border: 2px solid black;
+    border-radius: 10px;
+}

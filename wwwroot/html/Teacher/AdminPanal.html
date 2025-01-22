@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!--<button id="redirectBtn" type="button" class="btn btn-primary">create</button>-->
+    <!--model-->
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        create
+    </button>
+     
+    <div class="container">
+         <div class="row" id="card" >
+             
+         </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="classroom" placeholder="Recipient's username" aria-label="create classroom" aria-describedby="basic-addon2">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="save" class="btn btn-primary" onclick="CreateClassroom()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        //let id;
+        $(document).ready(function () {
+            Getclassroom();
+        });
+
+        function Getclassroom() {
+            const data = JSON.parse(localStorage.getItem("User"))
+
+            $.ajax({
+                url: `https://localhost:7106/api/Classroom?userId=${data.teacherId}`,
+                type: "GET",
+                contentType: "application/json", // Set content type for JSON
+                success: function (result) {
+                    $('#card').empty();
+                    $.each(result, function (index, element) {
+                        console.log("data -", element);
+                      var id = element.classroomId
+                        var newCol = $('<div class="col-3 bg-primary me-2" onclick="RedirectPage(' + id + ')"></div>');
+                        newCol.append('<p>' + element.classroomName + '</p>');  
+                        $('#card').append(newCol);
+                    });
+                },
+                error: function (errormessage) {
+                    console.error(errormessage); // Log the error for debugging
+                    alert("Error: " + errormessage.responseText);
+                }
+            });
+        }
+
+        function CreateClassroom() {
+
+            const data = JSON.parse(localStorage.getItem("User")); // Parse JSON from localStorage
+            const classroomName = $('#classroom').val();
+            const id = data.teacherId;
+            //$("#save").attr("data-bs-dismiss", "modal");
+            $.ajax({
+                url: `https://localhost:7106/api/Classroom?classroomName=${classroomName}&userId=${id}`,
+                type: "POST",
+                contentType: "application/json", // Set content type for JSON
+                success: function (result) {
+                    if (result) {
+                        $("#save").attr("data-bs-dismiss", "modal");
+                    }
+                },
+                error: function (errormessage) {
+                    console.error(errormessage); // Log the error for debugging
+                    alert("Error: " + errormessage.responseText);
+                }
+            });
+        }
+
+        function RedirectPage(id) {
+            window.location.href = "work.html?id=" + id;
+        }
+    </script>
+
+
+</body>
+</html>

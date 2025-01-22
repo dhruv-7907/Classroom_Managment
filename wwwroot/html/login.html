@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <form class="mt-5" id="loginForm" onsubmit="Login(event)">
+                    <!-- Pass the event here -->
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="Student" required>
+                        <label class="form-check-label" for="flexRadioDefault1">Student</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="Teacher" required>
+                        <label class="form-check-label" for="flexRadioDefault2">Teacher</label>
+                    </div>
+                    <button type="submit" id="getValBtnID" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+        <button type="button" onclick="add()" class="btn btn-secondary mt-3">Click Me</button>
+    </div>
+
+    <script type="text/javascript">
+        function Login(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Prepare data from the form
+            const email = $('#exampleInputEmail1').val();
+            const type = $('input[name="flexRadioDefault"]:checked').val();
+
+            $.ajax({
+                url: `https://localhost:7106/api/Login?Type=${type}&Email=${email}`, 
+                type: "GET", // Change to POST as needed
+                contentType: "application/json", // Set content type
+                dataType: "json",
+                success: function (result) {
+                    localStorage.setItem("User", JSON.stringify(result[0]));
+                    if (result[0].teacherName) {
+                        window.location.href = "./Teacher/AdminPanal.html";
+                    }
+                    if (result[0].studentName) {
+                        window.location.href = "./Student/studentwork.html";
+                    }
+                    alert("Response received: " + JSON.stringify(result[0])); // Display the result
+                },
+                error: function (errormessage) {
+                    console.error(errormessage); // Log the error for debugging
+                    alert("Error: " + errormessage.responseText);
+                }
+            });
+        }
+
+        function add() {
+            alert("This is a test button");
+        }
+    </script>
+</body>
+</html>

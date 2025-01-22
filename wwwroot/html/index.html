@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Page with Header and Footer</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../css/commen.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div id="LOGIN"></div>
+    <!-- Header Section -->
+    <!--<div id="header"> </div>-->
+    <!--<div id="NAVBAR"></div>-->
+    <!--<div id="sidebar1">-->
+    <div id="Admin"></div>
+    <!-- Content Section -->
+    <!--<div id="content">1</div>-->
+    <!-- Footer Section -->
+    <!--<div id="footer"></div>-->
+
+    <script>
+        $(document).ready(function () {
+            // Load header and footer initially
+
+            $('#LOGIN').load('login.html');
+
+            // Load default content (home page)
+            //$('#content').load('home.html');
+
+            // Load home page when "Home" is clicked
+            $(document).on('click', '#load-home', function () {
+                $('#content').load('home.html');
+            });
+
+            // Load about page when "About" is clicked
+            $(document).on('click', '#load-about', function () {
+                $('#content').load('about.html');
+            });
+
+            // Load contact page when "Contact" is clicked
+            $(document).on('click', '#load-contact', function () {
+                $('#content').load('contact.html');
+            });
+        });
+    </script>
+
+</body>
+</html>

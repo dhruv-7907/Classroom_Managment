@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Push Body Sidebar</title>
+    
+</head>
+<body>
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">×</a>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </div>
+
+    <div id="main-content" class="main-content">
+        <button class="open-btn" onclick="openSidebar()">☰ Open Sidebar</button>
+        <h2>Content Area</h2>
+        <p>This is where your main content goes. When the sidebar opens, this content will be pushed to the right.</p>
+    </div>
+
+    <script>
+        function openSidebar() {
+            document.getElementById("sidebar").style.left = "0";
+            document.getElementById("main-content").style.marginLeft = "250px";
+        }
+
+        function closeSidebar() {
+            document.getElementById("sidebar").style.left = "-250px";
+            document.getElementById("main-content").style.marginLeft = "0";
+        }
+    </script>
+</body>
+</html>
